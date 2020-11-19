@@ -45,6 +45,8 @@ has_many :plants, through: :plant_tags
   end
 ```
 
+
+
 • Seed no banco de dados
 ```
 Garden.destroy_all if Rails.env.development?
