@@ -60,7 +60,7 @@ has_many :plants, through: :plant_tags
  end
  
  def create
- 
+  
  end
 ```
 • Seed no banco de dados
