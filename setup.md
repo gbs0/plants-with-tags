@@ -55,14 +55,23 @@ has_many :plants, through: :plant_tags
 • Criar as Actions do Controller Plant_tags
 ```
  def new
-   @plant = Plant.find(params[:id])
+   @plant = Plant.find(params[:plant_id])
    @plant_tag = PlantTag.new
  end
  
  def create
-  
+   @plant = Plant.find(params[:plant_tag])
+   @tag = Tag.find(params[:plant_tag][:tag])
+   plant_tag = PlantTag.new
+   plant_tag.plant = @plant
+   plant_tag.tag = @tag
+   plant_tag.save
+   redirect_to garden_path(@plant.garden)
  end
 ```
+*Testar código*
+
+
 • Seed no banco de dados
 ```
 Garden.destroy_all if Rails.env.development?
