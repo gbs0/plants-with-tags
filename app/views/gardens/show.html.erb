@@ -7,15 +7,24 @@
 <div class="container my-5">
   <div class="row">
     <div class="col">
-      <div class="cards">
+      <div class="cards mb-5">
         <% @garden.plants.each do |plant| %>
           <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= plant.image_url %>)">
             <%= plant.name %>
             <%= link_to plant_path(plant), method: :delete, data: { confirm: 'Are you sure?' }, class: 'card-remove-link' do %>
-              <i class="fas fa-trash"></i>
+              <i class="fas fa-times-circle"></i>
             <% end %>
+            <%#= Colocar link_to new_plant_plant_tag_path(plant)%>
+            <div class="card-tags">
+              <% plant.plant_tags.each do |plant_tags| %>
+                <span><%= plant_tags.tag.name %></span>
+                <%= link_to plant_tag_path(plant_tags), method: :delete, data: { confirm: 'Are you sure?' }, class: 'card-remove-link' do %>
+                  <i class="fas fa-trash"></i>
+                <% end %>
+              <% end %>
+              <%= link_to "+", new_plant_plant_tag_path(plant) %>
+            </div>
           </div>
-
         <% end %>
       </div>
     </div>
@@ -34,9 +43,10 @@
         <%= f.submit 'Save your plant', class: 'btn btn-primary' %>
       <% end %>
     </div>
+  <%= link_to 'Edit', edit_garden_path(@garden) %> |
+  <%= link_to 'Back', gardens_path %>
   </div>
 </div>
 
 
-<%= link_to 'Edit', edit_garden_path(@garden) %> |
-<%= link_to 'Back', gardens_path %>
+
