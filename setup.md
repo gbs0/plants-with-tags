@@ -48,8 +48,13 @@ has_many :plants, through: :plant_tags
 • Criar uma view p/ adicionar as tags:
 *app/views/plant_tags/new.html.erb*
 ```
-
-
+<div class="container">
+  <h1>Add tag for <%= @plant.name %></h1>
+  <%= simple_form_for [@plant, @plant_tag] do |f|%>
+    <%= f.input :tag, collection: Tag.all, input_html: { multiple: true, class: "multiple-select mb-2" }, include_hidden: false %>
+    <%= f.submit "Add Tag", class: "btn btn-primary"%>
+  <% end %>
+</div>
 ```
 
 • Criar as Actions do Controller Plant_tags
